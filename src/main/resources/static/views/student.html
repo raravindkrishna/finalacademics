@@ -1,0 +1,171 @@
+<div class="outer-box">
+  <br />
+  <div class="container">
+    <div class="container">
+      <div class="row">
+        <div class="col-6 subhdng">
+          <h2 >Students</h2>
+        </div>
+          <div class="col-6">
+           
+            <span class="btnaligntwo" ><button class="addbtn btncrctn" ng-click="deleteSelectedStudents()">Delete </button></span>
+  <span class="btnalignone"><button  class="addbtn btncrctn" ng-click="editStudent()">Edit</button></span>
+  <span  class="btnalignone"><button  class="addbtn btncrctn" ng-click="createStudent()">Add</button></span>
+
+
+
+<span  class="search-bar searchcrctn" >
+        <i
+          class="fa-solid fa-magnifying-glass fa-lg searchi"
+         
+        ></i>
+
+        <input
+          placeholder="Search"
+          type="text"
+          ng-model="search"
+          class="search-input"
+          style="border: none; outline: none"
+        />
+</span>
+          </div>
+          </div>
+    </div>
+    <br />
+          <div class="container">
+          <table>
+            <tr>
+              <th><input
+                type="checkbox"
+                title="Select All"
+                ng-model="selectAll"
+                ng-change="toggleSelectAll()"
+              /></th>
+              <th>Roll No.</th>
+              <th>Student Name</th>
+            </tr>
+            <tr class="items" ng-repeat="student in students | filter: search">
+              <td><input type="checkbox" ng-model="student.selected" /></td>
+              <td>{{ student.rollNo }}</td>
+              <td>{{ student.studentName }}</td>
+            </tr>
+          </table>
+</div>
+          <div
+            id="editStudentModal"
+            class="inmodal"
+            ng-show="showStudentEditModal"
+          >
+            <div class="inmodal-content">
+                <div class="inmodalhead">
+              <h2>Edit Student</h2>
+              <div class="close">
+          <i class="fa-solid fa-xmark fa-xl" ng-click="closeStudentEditModal()"></i>
+          </div>
+              </div>
+              <hr>
+              <form ng-submit="updateStudent()">
+                 <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <label>Roll No.:</label></div>
+                <div class="col-6">
+                <input
+                  type="text"
+                  ng-model="editedStudent.rollNo"
+                  required
+                /></div>
+                </div><br />
+                <div class="row">
+                  <div class="col-6">
+                <label>Student Name:</label>
+                </div>
+                <div class="col-6">
+                <input
+                  type="text"
+                  ng-model="editedStudent.studentName"
+                  required
+                /></div>
+</div><hr>
+                <button  class="addbtn homecrt" type="submit">Save</button>
+              </form>
+            </div>
+          </div>
+  </div>
+          <div
+            id="createStudentModal"
+            class="inmodal"
+            ng-show="showStudentCreateModal"
+          >
+            <div class="inmodal-content">
+              <div class="inmodalhead">
+              
+              <h2>Create Student</h2>
+                <div class="close">
+          <i class="fa-solid fa-xmark fa-xl" ng-click="closeStudentCreateModal()"></i>
+          </div>
+              </div>
+              <hr>
+              <form ng-submit="addStudent()">
+                <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <label>Roll No.:</label>
+                </div>
+                <div class="col-6">
+                <input
+                placeholder="Roll No."
+                  type="text"
+                  ng-model="newStudent.rollNo"
+                  required
+                /></div></div><br />
+                <div class="row">
+                  <div class="col-6">
+                <label>Student Name:</label></div>
+                <div class="col-6">
+                <input
+                placeholder="Student Name"
+                  type="text"
+                  ng-model="newStudent.studentName"
+                  required
+                /></div></div> <hr>
+
+                <button   class="addbtn homecrt" type="submit">Create</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <br />
+
+          <div id="delStudentModal" class="inmodal" ng-show="StudentRemoveModal">
+      <div class="inmodal-content">
+        <div class="inmodalhead">
+       
+          <h2>Delete Student</h2>
+          <div class="close">
+              <i class="fa-solid fa-xmark fa-xl"  ng-click="closeStudentRemoveModal()"></i>
+            </div>
+          </div>
+
+          <hr>
+          <p>Are you sure you want to delete selected Student?</p>
+          <br>
+        
+
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <button  class="addbtn homecrt" ng-click="deleteStudentConfirm()">Delete</button>
+          <button  class="cancelbtn homecrtmarg" ng-click="closeStudentRemoveModal()"> Cancel</button>
+              </div>
+          
+          </div>
+          </div>
+          
+      </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>

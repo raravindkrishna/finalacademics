@@ -1,0 +1,363 @@
+* {
+  margin: 0;
+  margin-bottom: 0;
+}
+body {
+  background-color: rgb(224, 222, 222);
+}
+main {
+  padding-top: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+h1 {
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 27px;
+
+  color: white;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+}
+h2 {
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: red;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.inmodalhead {
+  display: flex;
+  justify-content: space-between;
+}
+
+ul {
+  padding: 0;
+}
+.box li {
+  width: 300px;
+
+  background-color: #dfdfdf;
+
+  font-size: 13px;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.box li:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px);
+}
+.box li:not(:hover) {
+  transition-delay: 0.1s;
+}
+table {
+  border-collapse: collapse;
+
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+th {
+  border: 1px solid rgb(169, 169, 169);
+  background-color: lightgray;
+  color: rgb(95, 94, 94);
+  text-align: center;
+  padding: 10px;
+}
+
+td {
+  border: 1px solid rgb(169, 169, 169);
+  background-color: #f9f9f9;
+  text-align: center;
+  padding: 10px;
+}
+
+tr {
+  border: 1px solid #000;
+}
+
+input[type="text"].ng-pristine {
+  border: 1px solid #ccc;
+}
+
+input[type="text"].ng-dirty {
+  border: 1px solid lightgreen;
+}
+
+input[type="text"].ng-touched.ng-invalid {
+  border: 1px solid #ff0000;
+}
+
+.redmsg {
+  color: red;
+}
+.addbtn {
+  background-color: white;
+  color: red;
+
+  padding: 5px 20px;
+  border: solid 2px red;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.addbtn:hover {
+  background-color: red;
+  color: white;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.inmodal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.inmodal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 25px;
+  border: 1px solid black;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  display: inline-block;
+  color: red;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: darkred;
+  text-decoration: none;
+}
+
+select {
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  width: 200px;
+}
+
+select option {
+  padding: 7px;
+}
+
+input[type="text"] {
+  padding: 7px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="textarea"] {
+  padding: 7px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+label {
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.outer-box {
+  background-color: #f4f4f4;
+  border-radius: 8px;
+}
+.sidebar {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  background-color: #f4f4f4;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  font-size: 13px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.sidebar ul li a:hover {
+  color: red;
+}
+i {
+  margin-bottom: 20px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+nav {
+  background-color: red;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  text-align: center;
+}
+
+.search-bar {
+  height: 40px;
+  margin-top: 12px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+.search-input {
+  height: 30px;
+  padding: 0px 0px;
+  margin-top: -10px;
+}
+p {
+  margin-bottom: 0px;
+}
+
+.cgs {
+  background-color: #e5e5e5;
+  border-radius: 8px;
+  padding: 15px 15px;
+}
+
+.cancelbtn {
+  background-color: white;
+  color: rgba(0, 0, 0, 0.658);
+
+  padding: 5px 20px;
+  border: solid 2px rgba(0, 0, 0, 0.658);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.home-row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.subhdng {
+  padding-top: 10px;
+}
+
+.home-onediv {
+  padding: 0px;
+}
+
+.home-onespan {
+  float: right;
+}
+.home-searchspan {
+  float: right;
+
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.addcgbtn {
+  padding: 8px 35px;
+  margin-top: 5px;
+  margin-right: 17px;
+}
+
+.homecrt {
+  float: right;
+  padding: 7px 25px;
+}
+
+.homecrtmarg {
+  float: right;
+  padding: 7px 25px;
+  margin-right: 10px;
+}
+
+.searchi {
+  color: #a7a8aa;
+  margin-left: 10px;
+}
+
+.editi {
+  color: red;
+  cursor: pointer;
+}
+
+.searchcrctn {
+  float: right;
+  margin-right: 10px;
+  height: 39px;
+}
+.btncrctn {
+  padding: 8px 20px;
+}
+
+.btnalignone {
+  padding-top: 12px;
+  float: right;
+  margin-right: 10px;
+}
+.btnaligntwo {
+  padding-top: 12px;
+  float: right;
+}
+
+.divincgs {
+  padding-right: 0px;
+}
+
+.stdntsdiv {
+  padding: 0px;
+}
+
+.btnaligncgs {
+  padding-top: 13px;
+  float: right;
+}
+
+.btnaligncgstwo {
+  padding-top: 13px;
+  float: right;
+  margin-right: 10px;
+}

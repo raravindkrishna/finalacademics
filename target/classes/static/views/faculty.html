@@ -1,0 +1,153 @@
+<div class="outer-box">
+  <br />
+  <div class="container">
+    <div class="container">
+      <div class="row">
+         <div class="col-6 subhdng">
+      <h2 >Faculties</h2>
+     </div>
+     <div class="col-6">
+      
+  <span class="btnaligntwo"><button  class="addbtn btncrctn" ng-click="deleteSelectedFaculties()">Delete </button></span>
+  <span class="btnalignone"><button  class="addbtn btncrctn" ng-click="editFaculty()">Edit</button></span>
+  <span class="btnalignone"><button  class="addbtn btncrctn" ng-click="createFaculty()">Add</button></span>
+
+
+
+<span  class="search-bar searchcrctn" >
+        <i
+          class="fa-solid fa-magnifying-glass fa-lg searchi"
+         
+        ></i>
+
+        <input
+          placeholder="Search"
+          type="text"
+          ng-model="search"
+          class="search-input"
+          style="border: none; outline: none"
+        />
+</span>
+     </div>
+      <div>
+      
+      </div>
+      <br>
+<div class="container">
+      <table>
+        <tr>
+          <th><input
+            type="checkbox"
+            title="Select All"
+            ng-model="selectAll"
+            ng-change="toggleSelectAll()"
+          /></th>
+
+          <th>Faculty Name</th>
+        </tr>
+        <tr class="items" ng-repeat="faculty in faculties | filter: search">
+          <td><input type="checkbox" ng-model="faculty.selected" /></td>
+
+          <td>{{ faculty.facultyName }}</td>
+        </tr>
+      </table>
+</div>
+      <div id="editFacultyModal" class="inmodal" ng-show="showFacultyEditModal">
+        <div class="inmodal-content">
+            <div class="inmodalhead">
+               <h2>Edit Faculty</h2>
+        
+         <div class="close">
+                <i class="fa-solid fa-xmark fa-xl" ng-click="closeFacultyEditModal()"></i>
+                </div>
+          </div>
+          <hr>
+          <form ng-submit="updateFaculty()">
+            <div class="container">
+            <div class="row">
+              <div class="col-6">
+            <label>Faculty Name:</label>
+            </div>
+            <div class="col-6">
+            <input
+              type="text"
+              ng-model="editedFaculty.facultyName"
+              required
+            /></div>
+              </div><hr>
+            <button  class="addbtn homecrt" type="submit">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div
+        id="createFacultyModal"
+        class="inmodal"
+        ng-show="showFacultyCreateModal"
+      >
+        <div class="inmodal-content">
+           <div class="inmodalhead">
+         
+          <h2>Create Faculty</h2>
+          <div class="close">
+                <i class="fa-solid fa-xmark fa-xl" ng-click="closeFacultyCreateModal()"></i>
+                </div>
+          </div>
+          <hr>
+          <form ng-submit="addFaculty()">
+            <div class="container">
+            <div class="row">
+              <div class="col-6">
+            <label>Faculty Name:</label>
+            </div>
+            <div class="col-6">
+            <input
+            placeholder="Faculty Name"
+              type="text"
+              ng-model="newFaculty.facultyName"
+              required
+            /></div>
+            </div>
+          <hr>
+            <button  class="addbtn homecrt" type="submit">Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div id="delFacultyModal" class="inmodal" ng-show="FacultyRemoveModal">
+      <div class="inmodal-content">
+        <div class="inmodalhead">
+       
+          <h2>Delete Faculty</h2>
+          <div class="close">
+              <i class="fa-solid fa-xmark fa-xl"  ng-click="closeFacultyRemoveModal()"></i>
+            </div>
+          </div>
+
+          <hr>
+          <p>Are you sure you want to delete selected Faculties?</p>
+          <br>
+  
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <button  class="addbtn homecrt" ng-click="deleteFacultyConfirm()">Delete</button>
+          <button class="cancelbtn homecrtmarg" ng-click="closeFacultyRemoveModal()"> Cancel</button>
+              </div>
+          
+          </div>
+          </div>
+          
+
+      </div>
+      </div>
+
+
+  </div>
+     <br>
+</div>
+</div>
+</div>
