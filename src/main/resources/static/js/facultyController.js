@@ -1,9 +1,9 @@
-app.controller("FacultyController", function ($scope, $http, $window) {
+app.controller("FacultyController", function ($scope, facultyService) {
   $scope.selectedAction = "";
 
   $scope.fetchFaculties = function () {
-    $http
-      .get("http://localhost:8080/api/faculty")
+    facultyService
+      .fetchFaculties()
       .then(function (response) {
         $scope.faculties = response.data;
       })
@@ -41,11 +41,9 @@ app.controller("FacultyController", function ($scope, $http, $window) {
 
   $scope.deleteFacultyConfirm = function () {
     var selectedFacultyIds = $scope.selectedFacultyIds;
-    $http({
-      method: "DELETE",
-      url: "http://localhost:8080/api/faculty",
-      params: { id: selectedFacultyIds },
-    })
+
+    facultyService
+      .deleteFaculties(selectedFacultyIds)
       .then(function (response) {
         $scope.fetchFaculties();
         $scope.closeFacultyRemoveModal();
@@ -69,11 +67,8 @@ app.controller("FacultyController", function ($scope, $http, $window) {
   };
 
   $scope.updateFaculty = function () {
-    $http
-      .put(
-        "http://localhost:8080/api/faculty/" + $scope.editedFaculty.id,
-        $scope.editedFaculty
-      )
+    facultyService
+      .updateFaculty($scope.editedFaculty.id, $scope.editedFaculty)
       .then(function (response) {
         $scope.fetchFaculties();
 
@@ -95,8 +90,8 @@ app.controller("FacultyController", function ($scope, $http, $window) {
   };
 
   $scope.addFaculty = function () {
-    $http
-      .post("http://localhost:8080/api/faculty", $scope.newFaculty)
+    facultyService
+      .createFaculty($scope.newFaculty)
       .then(function (response) {
         $scope.fetchFaculties();
       })

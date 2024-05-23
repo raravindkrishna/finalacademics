@@ -1,6 +1,6 @@
 app.controller(
   "ClassGroupStudentController",
-  function ($scope, $http, $window, $location, $routeParams) {
+  function ($scope, $http, $location, $routeParams) {
     let classGroupId = $routeParams.classGroupId;
 
     $scope.getStudents = function () {

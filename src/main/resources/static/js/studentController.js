@@ -1,9 +1,9 @@
-app.controller("StudentController", function ($scope, $http, $window) {
+app.controller("StudentController", function ($scope, studentService) {
   $scope.selectedAction = "";
 
   $scope.fetchStudents = function () {
-    $http
-      .get("http://localhost:8080/api/student")
+    studentService
+      .fetchStudents()
       .then(function (response) {
         $scope.students = response.data;
       })
@@ -41,11 +41,8 @@ app.controller("StudentController", function ($scope, $http, $window) {
 
   $scope.deleteStudentConfirm = function () {
     var selectedStudentIds = $scope.selectedStudentIds;
-    $http({
-      method: "DELETE",
-      url: "http://localhost:8080/api/student",
-      params: { id: selectedStudentIds },
-    })
+    studentService
+      .deleteStudents(selectedStudentIds)
       .then(function (response) {
         $scope.fetchStudents();
         $scope.closeStudentRemoveModal();
@@ -70,11 +67,8 @@ app.controller("StudentController", function ($scope, $http, $window) {
   };
 
   $scope.updateStudent = function () {
-    $http
-      .put(
-        "http://localhost:8080/api/student/" + $scope.editedStudent.id,
-        $scope.editedStudent
-      )
+    studentService
+      .updateStudent($scope.editedStudent.id, $scope.editedStudent)
       .then(function (response) {
         $scope.fetchStudents();
 
@@ -96,8 +90,8 @@ app.controller("StudentController", function ($scope, $http, $window) {
   };
 
   $scope.addStudent = function () {
-    $http
-      .post("http://localhost:8080/api/student", $scope.newStudent)
+    studentService
+      .createStudent($scope.newStudent)
       .then(function (response) {
         $scope.fetchStudents();
       })

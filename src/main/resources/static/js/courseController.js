@@ -1,7 +1,7 @@
-app.controller("CourseController", function ($scope, $http, $window) {
+app.controller("CourseController", function ($scope, courseService) {
   $scope.fetchCourses = function () {
-    $http
-      .get("http://localhost:8080/api/course")
+    courseService
+      .fetchCourses()
       .then(function (response) {
         $scope.courses = response.data;
       })
@@ -39,11 +39,9 @@ app.controller("CourseController", function ($scope, $http, $window) {
 
   $scope.deleteCourseConfirm = function () {
     var selectedCourseIds = $scope.selectedCourseIds;
-    $http({
-      method: "DELETE",
-      url: "http://localhost:8080/api/course",
-      params: { id: selectedCourseIds },
-    })
+
+    courseService
+      .deleteCourses(selectedCourseIds)
       .then(function (response) {
         $scope.fetchCourses();
         $scope.closeCourseRemoveModal();
@@ -71,11 +69,9 @@ app.controller("CourseController", function ($scope, $http, $window) {
     if (!$scope.editedCourse.description) {
       $scope.editedCourse.description = "-";
     }
-    $http
-      .put(
-        "http://localhost:8080/api/course/" + $scope.editedCourse.id,
-        $scope.editedCourse
-      )
+
+    courseService
+      .updateCourse($scope.editedCourse.id, $scope.editedCourse)
       .then(function (response) {
         $scope.fetchCourses();
         $scope.closeCourseEditModal();
@@ -99,8 +95,9 @@ app.controller("CourseController", function ($scope, $http, $window) {
     if (!$scope.newCourse.description) {
       $scope.newCourse.description = "-";
     }
-    $http
-      .post("http://localhost:8080/api/course", $scope.newCourse)
+
+    courseService
+      .createCourse($scope.newCourse)
       .then(function (response) {
         $scope.fetchCourses();
       })
