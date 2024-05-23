@@ -1,117 +1,105 @@
 <div class="outer-box">
-   <br>
+  <br>
   <div class="container">
-<div class="container">
- <div class="row">
-  <div class="col-6 subhdng">
-  <h2 >Courses</h2>
-</div>
-<div class="col-6">
-  
-
-  <span class="btnaligntwo"><button  class="addbtn btncrctn" ng-click="deleteSelectedCourses()">Delete </button></span>
-  <span class="btnalignone"><button class="addbtn btncrctn" ng-click="editCourse()">Edit</button></span>
-  <span class="btnalignone"><button class="addbtn btncrctn" ng-click="createCourse()">Add</button></span>
-
-
-
-<span class="search-bar searchcrctn" >
-        <i
-          class="fa-solid fa-magnifying-glass fa-lg searchi"
-        
-        ></i>
-
-        <input
-          placeholder="Search"
-          type="text"
-          ng-model="search"
-          class="search-input"
-          style="border: none; outline: none"
-        />
-</span>
-
-</div>
-
-  <br />
-  
-  </div>
-<br>
-    <table>
-      <tr>
-        <th><input
-        type="checkbox"
-        title="Select All"
-        ng-model="selectAll"
-        ng-change="toggleSelectAll()"
-      /></th>
-        <th>Course Code</th>
-        <th>Course Name</th>
-        <th>Description</th>
-      </tr>
-      <tr class="items" ng-repeat="course in courses | filter: search">
-        <td><input type="checkbox" ng-model="course.selected" /></td>
-        <td>{{ course.courseCode }}</td>
-        <td>{{ course.courseName }}</td>
-        <td>{{course.description}}</td>
-      </tr>
-    </table>
-<br>
-    <div id="editCourseModal" class="inmodal" ng-show="showCourseEditModal">
-      <div class="inmodal-content">
-        <div class="inmodalhead">
-        <h2>Edit Course</h2>
-        <div class="close">
-          <i class="fa-solid fa-xmark fa-xl" ng-click="closeCourseEditModal()"></i>
-          </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-6 subhdng">
+          <h2>Courses</h2>
         </div>
-        <hr>
-        <form ng-submit="updateCourse()">
-          <div class="container">
-            <div class="row">
-              <div class="col-6">
-          <label>Course Code:</label>
-          </div>
-                        <div class="col-6">
+        <div class="col-6">
 
-          <input type="text" ng-model="editedCourse.courseCode" required /><br>
-          </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-6">
-          <label>Course Name:</label>
-          </div>
-          <div class="col-6">
-          <input type="text" ng-model="editedCourse.courseName" required /><br>
-          </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-6">
-          <label>Description:</label>
-          </div>
-          <div class="col-6">
-          <input type="textarea" ng-model="editedCourse.description" /><br>
-          </div>
+
+          <span class="btnaligntwo"><button class="addbtn btncrctn" ng-click="deleteSelectedCourses()">Delete
+            </button></span>
+          <span class="btnalignone"><button class="addbtn btncrctn" ng-click="editCourse()">Edit</button></span>
+          <span class="btnalignone"><button class="addbtn btncrctn" ng-click="createCourse()">Add</button></span>
+
+
+
+          <span class="search-bar searchcrctn">
+            <i class="fa-solid fa-magnifying-glass fa-lg searchi"></i>
+
+            <input placeholder="Search" type="text" ng-model="search" class="search-input"
+              style="border: none; outline: none" />
+          </span>
+
+        </div>
+
+        <br />
+
+      </div>
+      <br>
+      <table>
+        <tr>
+          <th><input type="checkbox" title="Select All" ng-model="selectAll" ng-change="toggleSelectAll()" /></th>
+          <th>Course Code</th>
+          <th>Course Name</th>
+          <th>Description</th>
+        </tr>
+        <tr class="items" ng-repeat="course in courses | filter: search">
+          <td><input type="checkbox" ng-model="course.selected" /></td>
+          <td>{{ course.courseCode }}</td>
+          <td>{{ course.courseName }}</td>
+          <td>{{course.description}}</td>
+        </tr>
+      </table>
+      <br>
+      <div id="editCourseModal" class="inmodal" ng-show="showCourseEditModal">
+        <div class="inmodal-content">
+          <div class="inmodalhead">
+            <h2>Edit Course</h2>
+            <div class="close">
+              <i class="fa-solid fa-xmark fa-xl" ng-click="closeCourseEditModal()"></i>
+            </div>
           </div>
           <hr>
-          
-          
-          <button   class="addbtn homecrt" type="submit">Save</button>
-      
-          </div>
-        </form>
-      </div>
-    </div>
-</div>
-    <div id="createCourseModal" class="inmodal" ng-show="showCourseCreateModal">
-      <div class="inmodal-content">
-              <div class="inmodalhead">
-                <h2>Create Course</h2>
-                <div class="close">
-                <i class="fa-solid fa-xmark fa-xl" ng-click="closeCourseCreateModal()"></i>
+          <form ng-submit="updateCourse()">
+            <div class="container">
+              <div class="row">
+                <div class="col-6">
+                  <label>Course Code:</label>
+                </div>
+                <div class="col-6">
+
+                  <input type="text" ng-model="editedCourse.courseCode" required /><br>
                 </div>
               </div>
+              <br>
+              <div class="row">
+                <div class="col-6">
+                  <label>Course Name:</label>
+                </div>
+                <div class="col-6">
+                  <input type="text" ng-model="editedCourse.courseName" required /><br>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-6">
+                  <label>Description:</label>
+                </div>
+                <div class="col-6">
+                  <input type="textarea" ng-model="editedCourse.description" /><br>
+                </div>
+              </div>
+              <hr>
+
+
+              <button class="addbtn homecrt" type="submit">Save</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="createCourseModal" class="inmodal" ng-show="showCourseCreateModal">
+      <div class="inmodal-content">
+        <div class="inmodalhead">
+          <h2>Create Course</h2>
+          <div class="close">
+            <i class="fa-solid fa-xmark fa-xl" ng-click="closeCourseCreateModal()"></i>
+          </div>
+        </div>
         <hr>
         <form ng-submit="addCourse()">
           <div class="container">
@@ -120,63 +108,67 @@
                 <label>Course Code:</label>
               </div>
               <div class="col-6">
-                  <input placeholder="Course Code" type="text" ng-model="newCourse.courseCode" required /><br>
+                <input placeholder="Course Code" type="text" ng-model="newCourse.courseCode" required /><br>
               </div>
             </div>
             <br>
-          <div class="row">
-            <div class="col-6">
-              <label>Course Name:</label></div>
+            <div class="row">
               <div class="col-6">
-              <input placeholder="Course Name" type="text" ng-model="newCourse.courseName" required /><br></div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-6">
-              <label>Description:</label></div>
+                <label>Course Name:</label>
+              </div>
               <div class="col-6">
-              <input placeholder="Description" type="textarea"  ng-model="newCourse.description" /><br></div>
-          </div>
-          
-          <hr>
-          
-            <button   class="addbtn homecrt" type="submit">Create</button>
-           
+                <input placeholder="Course Name" type="text" ng-model="newCourse.courseName" required /><br>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-6">
+                <label>Description:</label>
+              </div>
+              <div class="col-6">
+                <input placeholder="Description" type="textarea" ng-model="newCourse.description" /><br>
+              </div>
+            </div>
+
+            <hr>
+
+            <button class="addbtn homecrt" type="submit">Create</button>
+
           </div>
         </form>
       </div>
     </div>
-    </div>
-    <div id="delCourseModal" class="inmodal" ng-show="CourseRemoveModal">
-      <div class="inmodal-content">
-        <div class="inmodalhead">
-       
-          <h2>Delete Course</h2>
-          <div class="close">
-              <i class="fa-solid fa-xmark fa-xl"  ng-click="closeCourseRemoveModal()"></i>
-            </div>
-          </div>
-
-          <hr>
-          <p>Are you sure you want to delete selected Course?</p>
-          <hr>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <button  class="addbtn homecrt" ng-click="deleteCourseConfirm()">Delete</button>
-          <button  class="cancelbtn homecrtmarg" ng-click="closeCourseRemoveModal()"> Cancel</button>
-              </div>
-          
-          </div>
-          </div>
-
-
-      </div>
-      </div>
-
-
   </div>
+  <div id="delCourseModal" class="inmodal" ng-show="CourseRemoveModal">
+    <div class="inmodal-content">
+      <div class="inmodalhead">
+
+        <h2>Delete Course</h2>
+        <div class="close">
+          <i class="fa-solid fa-xmark fa-xl" ng-click="closeCourseRemoveModal()"></i>
+        </div>
+      </div>
+
+      <hr>
+      <p>Are you sure you want to delete selected Course?</p>
+      <hr>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <button class="addbtn homecrt" ng-click="deleteCourseConfirm()">Delete</button>
+            <button class="cancelbtn homecrtmarg" ng-click="closeCourseRemoveModal()"> Cancel</button>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>
 </div>
 </div>
 </div>

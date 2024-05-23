@@ -251,6 +251,8 @@ nav {
   height: 30px;
   padding: 0px 0px;
   margin-top: -10px;
+  border: none !important;
+  outline: none !important;
 }
 p {
   margin-bottom: 0px;
@@ -360,4 +362,8 @@ p {
   padding-top: 13px;
   float: right;
   margin-right: 10px;
+}
+
+.iconblack {
+  color: #000000;
 }

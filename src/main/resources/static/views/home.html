@@ -1,36 +1,21 @@
 <div class="outer-box">
   <br />
   <div class="container">
-    <div class="row home-row" >
-      <div  class="col-7 subhdng">
+    <div class="row home-row">
+      <div class="col-7 subhdng">
         <h2>Class Groups</h2>
       </div>
-      <div  class="col-5 home-onediv">
+      <div class="col-5 home-onediv">
         <span class="home-onespan">
-          <button
-    
-            class="addbtn addcgbtn"
-        
-            ng-click="addCg()"
-          >
+          <button class="addbtn addcgbtn" ng-click="addCg()">
             Add
           </button>
         </span>
-        <span
-          class="search-bar home-searchspan"     
-        >
-          <i
-            class="fa-solid fa-magnifying-glass fa-lg searchi"
-            
-          ></i>
+        <span class="search-bar home-searchspan">
+          <i class="fa-solid fa-magnifying-glass fa-lg searchi"></i>
 
-          <input
-            placeholder="Search"
-            type="text"
-            ng-model="search"
-            class="search-input"
-            style="border: none; outline: none;"
-          />
+          <input placeholder="Search" type="text" ng-model="search" class="search-input"
+            style="border: none; outline: none;" />
         </span>
       </div>
     </div>
@@ -40,82 +25,64 @@
   <br />
   <div class="container">
 
-      <ul>
-        <div
-          class="box d-flex justify-content-evenly align-items-center flex-wrap"
-        >
-          <li
-            ng-repeat="classGroup in classGroups | filter: search"
-            ng-click="selectClassGroup(classGroup.id)"
-          >
+    <ul>
+      <div class="box d-flex justify-content-evenly align-items-center flex-wrap">
+        <li ng-repeat="classGroup in classGroups | filter: search" ng-click="selectClassGroup(classGroup.id)">
 
-          
-            {{ classGroup.classGroupName }}<br />
-            {{ classGroup.course.courseName }}
-          </li>
-        </div>
-      </ul>
-      <br />
-    </div>
-  </div>
-  <div id="createCgModal" class="inmodal" ng-show="showCgCreateModal">
-    <div class="inmodal-content">
-      <div class="inmodalhead">
-        <h2>Create ClassGroup</h2>
-        <div class="close">
-          <i
-            class="fa-solid fa-xmark fa-xl"
-            ng-click="closeCgCreateModal()"
-          ></i>
-        </div>
+
+          {{ classGroup.classGroupName }}<br />
+          {{ classGroup.course.courseName }}
+        </li>
       </div>
-      <hr />
-
-      <form ng-submit="addClassGroup()">
-        <div class="container">
-          <div class="row">
-            <div class="col-6"><label>ClassGroup Name</label></div>
-            <div class="col-6">
-              <input
-              placeholder="ClassGroup Name"
-                type="text"
-                ng-model="newClassGroup.classGroupName"
-                required
-              />
-            </div>
-          </div>
-          <br />
-          <div class="row">
-            <div class="col-6"><label>Select Course</label></div>
-            <div class="col-6">
-              <select
-                ng-model="newClassGroup.course"
-                ng-options="course as course.courseName for course in courses"
-              >
-                <option value="" disabled selected hidden>Select Course</option>
-                <option ng-repeat="course in courses" >{{ course.courseName }}</option>
-              </select>
-            </div>
-          </div>
-          <br />
-          <div class="row">
-            <div class="col-6"><label>Select Faculty </label></div>
-            <div class="col-6">
-              <select
-                ng-model="newClassGroup.faculty"
-                ng-options="faculty as faculty.facultyName for faculty in faculties"
-              >
-                <option value="" disabled selected hidden>Select Faculty</option>
-                <option ng-repeat="faculty in faculties" >{{ faculty.facultyName }}</option>
-              </select>
-            </div>
-          </div>
-          <br />
-          <hr>
-        
-          <button  class="addbtn homecrt" type="submit">Create</button>
-        </div>
-      </form>
-    </div>
+    </ul>
+    <br />
   </div>
+</div>
+<div id="createCgModal" class="inmodal" ng-show="showCgCreateModal">
+  <div class="inmodal-content">
+    <div class="inmodalhead">
+      <h2>Create ClassGroup</h2>
+      <div class="close">
+        <i class="fa-solid fa-xmark fa-xl" ng-click="closeCgCreateModal()"></i>
+      </div>
+    </div>
+    <hr />
+
+    <form ng-submit="addClassGroup()">
+      <div class="container">
+        <div class="row">
+          <div class="col-6"><label>ClassGroup Name</label></div>
+          <div class="col-6">
+            <input placeholder="ClassGroup Name" type="text" ng-model="newClassGroup.classGroupName" required />
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-6"><label>Select Course</label></div>
+          <div class="col-6">
+            <select ng-model="newClassGroup.course" ng-options="course as course.courseName for course in courses">
+              <option value="" disabled selected hidden>Select Course</option>
+              <option ng-repeat="course in courses">{{ course.courseName }}</option>
+            </select>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-6"><label>Select Faculty </label></div>
+          <div class="col-6">
+            <select ng-model="newClassGroup.faculty"
+              ng-options="faculty as faculty.facultyName for faculty in faculties">
+              <option value="" disabled selected hidden>Select Faculty</option>
+              <option ng-repeat="faculty in faculties">{{ faculty.facultyName }}</option>
+            </select>
+          </div>
+        </div>
+        <br />
+        <hr>
+
+        <button class="addbtn homecrt" type="submit">Create</button>
+      </div>
+    </form>
+  </div>
+</div>
 </div>

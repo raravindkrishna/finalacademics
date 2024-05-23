@@ -1,254 +1,227 @@
 <div class=" outer-box">
   <div class="container ">
-      <br />
-    <div  class="container ">
+    <br />
+    <div class="container ">
       <div class="row">
-        <div  class="col-11 subhdng"><h2>Class Group</h2></div>
-        
-          <button class="addbtn col-1" ng-click="deleteCg()">Delete</button>
+        <div class="col-11 subhdng">
+          <h2>Class Group</h2>
+        </div>
+
+        <button class="addbtn col-1" ng-click="deleteCg()">Delete</button>
       </div>
       <br />
 
-      <div  class="row ">
+      <div class="row ">
         <div class="cgs ">
           <div>
             <p>
               <b>ClassGroup Name:</b> {{classGroup.classGroupName}}
-              <i
-                class="fa-regular fa-pen-to-square fa-lg editi"
-               
-                ng-click="changeCgName()"
-              ></i>
+              <i class="fa-regular fa-pen-to-square fa-lg editi" ng-click="changeCgName()"></i>
             </p>
           </div>
           <div>
             <b>Faculty:</b> {{classGroup.faculty.facultyName}}
-            <i
-              class="fa-regular fa-pen-to-square fa-lg editi"
-             
-              ng-click="changeFaculty()"
-            ></i>
+            <i class="fa-regular fa-pen-to-square fa-lg editi" ng-click="changeFaculty()"></i>
           </div>
           <div><b>Course: </b> {{classGroup.course.courseName}}</div>
         </div>
       </div>
     </div>
-      <br />
-      <hr />
-            <div class="container">
-              <div class="row">
-                <div class="col-4 subhdng">  <h2>Students in the Class Group</h2></div>
-                <div  class="col-8 stdntsdiv">
-                   <span  class="btnaligncgs"  >
-              <button class="addbtn btncrctn" ng-click="deleteSelectedStudents()">Remove Student</button>
-            </span>
-                   <span class="btnaligncgstwo"  >
-              <button  class="addbtn btncrctn" ng-click="showStudentCreateModal()">Add Student</button>
-            </span>
-                 
-          <span  class="search-bar searchcrctn">
-              <i
-                class="fa-solid fa-magnifying-glass fa-lg searchi"
-      
-              ></i>
-
-              <input
-                placeholder="Search"
-                type="text"
-                ng-model="search"
-                class="search-input"
-                style="border: none; outline: none; "
-              />
-          </span>    
-            </div>
-            </div>
-      </div>
-      <br />
-        <div class="container divincgs" >
-          <table>
-            <tr>
-              <th>  <input
-                title="Select All"
-            type="checkbox"
-            ng-model="selectAll"
-            ng-change="toggleSelectAll()"
-          /></th>
-              <th>Roll No.</th>
-              <th>Student Name</th>
-            </tr>
-            <tr ng-repeat="joinStudent in joinStudents | filter:search ">
-              <td>
-                <input type="checkbox" ng-model="joinStudent.selected" />
-              </td>
-              <td>{{ joinStudent.rollNo }}</td>
-              <td>{{ joinStudent.studentName }}</td>
-            </tr>
-          </table>
+    <br />
+    <hr />
+    <div class="container">
+      <div class="row">
+        <div class="col-4 subhdng">
+          <h2>Students in the Class Group</h2>
         </div>
-      <br>
-    </div>
+        <div class="col-8 stdntsdiv">
+          <span class="btnaligncgs">
+            <button class="addbtn btncrctn" ng-click="deleteSelectedStudents()">Remove Student</button>
+          </span>
+          <span class="btnaligncgstwo">
+            <button class="addbtn btncrctn" ng-click="showStudentCreateModal()">Add Student</button>
+          </span>
 
-    <div id="editFacModal" class="inmodal" ng-show="showFacEditModal">
-      <div class="inmodal-content">
-          <div class="inmodalhead">
+          <span class="search-bar searchcrctn">
+            <i class="fa-solid fa-magnifying-glass fa-lg searchi"></i>
+
+            <input placeholder="Search" type="text" ng-model="search" class="search-input" />
+          </span>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="container divincgs">
+      <table>
+        <tr>
+          <th> <input title="Select All" type="checkbox" ng-model="selectAll" ng-change="toggleSelectAll()" /></th>
+          <th>Roll No.</th>
+          <th>Student Name</th>
+        </tr>
+        <tr ng-repeat="joinStudent in joinStudents | filter:search ">
+          <td>
+            <input type="checkbox" ng-model="joinStudent.selected" />
+          </td>
+          <td>{{ joinStudent.rollNo }}</td>
+          <td>{{ joinStudent.studentName }}</td>
+        </tr>
+      </table>
+    </div>
+    <br>
+  </div>
+
+  <div id="editFacModal" class="inmodal" ng-show="showFacEditModal">
+    <div class="inmodal-content">
+      <div class="inmodalhead">
         <h2>Edit Faculty</h2>
         <div class="close">
-        <i class="fa-solid fa-xmark fa-xl" ng-click=" closeFacEditModal()"></i>
-      </div>
+          <i class="fa-solid fa-xmark fa-xl" ng-click=" closeFacEditModal()"></i>
         </div>
-        <hr>
-        <form ng-submit="updateFac()">
-           <div class="container">
-            <div class="row">
-               <div class="col-6"><label>Select Faculty</label></div>
-               <div class="col-6">
-          <select 
-            ng-model="selectedFaculty"
-            ng-options="faculty as faculty.facultyName for faculty in faculties"
-          >
-            <option>Select Faculty</option>
-          </select></div>
-          </div>
-          
-          <hr>
-          <button  class="addbtn homecrt" type="submit">Save </button>
-         
-          </div>
-          </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div id="editCgModal" class="inmodal" ng-show="showCgEditModal">
-      <div class="inmodal-content">
-        <div class="inmodalhead">
-        <h2>Class Group</h2>
-        
-        <div class="close">
-        <i class="fa-solid fa-xmark fa-xl" ng-click="closeCgEditModal()"></i>
-      </div>
       </div>
       <hr>
-        <form ng-submit="updateCg()">
-          <div class="container">
-            <div class="row">
-              <div class="col-6">
-          <label>Class Group Name: </label>
+      <form ng-submit="updateFac()">
+        <div class="container">
+          <div class="row">
+            <div class="col-6"><label>Select Faculty</label></div>
+            <div class="col-6">
+              <select ng-model="selectedFaculty" ng-options="faculty as faculty.facultyName for faculty in faculties">
+                <option>Select Faculty</option>
+              </select>
+            </div>
+          </div>
+
+          <hr>
+          <button class="addbtn homecrt" type="submit">Save </button>
+
+        </div>
+    </div>
+  </div>
+  </form>
+</div>
+</div>
+<div id="editCgModal" class="inmodal" ng-show="showCgEditModal">
+  <div class="inmodal-content">
+    <div class="inmodalhead">
+      <h2>Class Group</h2>
+
+      <div class="close">
+        <i class="fa-solid fa-xmark fa-xl" ng-click="closeCgEditModal()"></i>
+      </div>
+    </div>
+    <hr>
+    <form ng-submit="updateCg()">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <label>Class Group Name: </label>
           </div>
           <div class="col-6">
-          <input
-            type="text"
-            placeholder="{{classGroup.classGroupName}}"
-            ng-model="editedCg.classGroupName"
-            required
-          />
+            <input type="text" placeholder="{{classGroup.classGroupName}}" ng-model="editedCg.classGroupName"
+              required />
           </div>
-          
-        </div>  
-       
+
+        </div>
+
         <hr>
 
-          <button  class="addbtn homecrt" type="submit">Save</button>
- 
+        <button class="addbtn homecrt" type="submit">Save</button>
+
+      </div>
+  </div>
+  </form>
+</div>
+</div>
+<div id="addStudentModal" class="inmodal" ng-show="addStudentCreateModal">
+  <div class="inmodal-content">
+    <div class="inmodalhead">
+
+      <h2>Create Student</h2>
+      <div class="close">
+        <i class="fa-solid fa-xmark fa-xl" ng-click="closeStudentCreateModal()"></i>
+      </div>
+    </div>
+
+    <hr>
+    <form ng-submit="addStudent()">
+      <div class="container">
+        <div class="row">
+          <div class="col-6"> <label> Select Student </label></div>
+          <div class="col-6">
+            <select ng-model="selectedStudent" ng-options="student as student.studentName for student in students">
+              <option value="" disabled selected hidden>Select Student</option>
+              <option ng-repeat="student in students">{{ student.studentName }}</option>
+            </select>
           </div>
         </div>
-        </form>
-      </div>
-    </div>
-    <div id="addStudentModal" class="inmodal" ng-show="addStudentCreateModal">
-      <div class="inmodal-content">
-        <div class="inmodalhead">
-       
-          <h2>Create Student</h2>
-            <div class="close">
-              <i class="fa-solid fa-xmark fa-xl"  ng-click="closeStudentCreateModal()"></i>
-            </div>
-      </div>
-     
         <hr>
-        <form ng-submit="addStudent()">
-           <div class="container">
-            <div class="row">
-              <div class="col-6"> <label> Select Student </label></div>
-              <div class="col-6">
-          <select
-            ng-model="selectedStudent"
-            ng-options="student as student.studentName for student in students"
-          >
-             <option value="" disabled selected hidden>Select Student</option>
-                <option ng-repeat="student in students">{{ student.studentName }}</option>
-          </select>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <button class="addbtn homecrt" type="submit">Add</button>
+              <button class="cancelbtn homecrtmarg" ng-click="closeStudentCreateModal()"> Cancel</button>
+            </div>
+
           </div>
-          </div>
-         <hr>
-           <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <button  class="addbtn homecrt" type="submit"  >Add</button>
-          <button class="cancelbtn homecrtmarg" ng-click="closeStudentCreateModal()"> Cancel</button>
-              </div>
-          
-          </div>
-          </div>
-        </form>
+        </div>
+    </form>
+  </div>
+</div>
+</div>
+<div id="delStudentModal" class="inmodal" ng-show="StudentRemoveModal">
+  <div class="inmodal-content">
+    <div class="inmodalhead">
+
+      <h2>Remove Student</h2>
+      <div class="close">
+        <i class="fa-solid fa-xmark fa-xl" ng-click="closeStudentRemoveModal()"></i>
       </div>
     </div>
-    </div>
-    <div id="delStudentModal" class="inmodal" ng-show="StudentRemoveModal">
-      <div class="inmodal-content">
-        <div class="inmodalhead">
-       
-          <h2>Remove Student</h2>
-          <div class="close">
-              <i class="fa-solid fa-xmark fa-xl"  ng-click="closeStudentRemoveModal()"></i>
-            </div>
-          </div>
 
-          <hr>
-          <p>Are you sure you want to remove selected Students from class group?</p>
-          <hr>
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <button  class="addbtn homecrt" ng-click="deleteConfirm()">Remove</button>
+    <hr>
+    <p>Are you sure you want to remove selected Students from class group?</p>
+    <hr>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <button class="addbtn homecrt" ng-click="deleteConfirm()">Remove</button>
           <button class="cancelbtn homecrtmarg" ng-click="closeStudentRemoveModal()"> Cancel</button>
-              </div>
-          
-          </div>
-          </div>
-          
-      </div>
-      </div>
-
-      <div id="delCgModal" class="inmodal" ng-show="CgRemoveModal">
-      <div class="inmodal-content">
-        <div class="inmodalhead">
-       
-          <h2>Delete ClassGroup</h2>
-          <div class="close">
-              <i class="fa-solid fa-xmark fa-xl"  ng-click="closeCgRemoveModal()"></i>
-            </div>
-          </div>
-
-          <hr>
-          <p>Are you sure you want to delete this class group?</p>
-          <hr>
-         
-          
-           <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <button  class="addbtn homecrt" ng-click="deleteCgConfirm()">Delete</button>
-          <button  class="cancelbtn homecrtmarg" ng-click="closeCgRemoveModal()"> Cancel</button>
-              </div>
-          
-          </div>
-          </div>
-
+        </div>
 
       </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="delCgModal" class="inmodal" ng-show="CgRemoveModal">
+  <div class="inmodal-content">
+    <div class="inmodalhead">
+
+      <h2>Delete ClassGroup</h2>
+      <div class="close">
+        <i class="fa-solid fa-xmark fa-xl" ng-click="closeCgRemoveModal()"></i>
       </div>
+    </div>
+
+    <hr>
+    <p>Are you sure you want to delete this class group?</p>
+    <hr>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <button class="addbtn homecrt" ng-click="deleteCgConfirm()">Delete</button>
+          <button class="cancelbtn homecrtmarg" ng-click="closeCgRemoveModal()"> Cancel</button>
+        </div>
+
+      </div>
+    </div>
 
 
   </div>
+</div>
+
+
+</div>
 </div>
