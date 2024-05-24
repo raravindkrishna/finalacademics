@@ -12,7 +12,11 @@ app.controller(
       homeService
         .getClassGroups()
         .then(function (response) {
-          $scope.classGroups = response.data;
+          if (response.status === 200) {
+            $scope.classGroups = response.data;
+          } else {
+            console.error("Error fetching ClassGroups:", response);
+          }
         })
         .catch(function (error) {
           console.error("Error fetching class groups:", error);
@@ -22,7 +26,6 @@ app.controller(
         this.classGroupId = theClassGroupId;
         $location.path("/classGroup/" + classGroupId + "/students");
       };
-      console.log(theClassGroupId);
 
       $scope.addCg = function () {
         $scope.showCgCreateModal = true;
@@ -31,7 +34,12 @@ app.controller(
           courseService
             .fetchCourses()
             .then(function (response) {
+              if(response.status===200){
               $scope.courses = response.data;
+              }
+              else {
+            console.error("Error fetching courses:", response);
+          }
             })
             .catch(function (error) {
               console.error("Error fetching courses:", error);
@@ -43,7 +51,12 @@ app.controller(
           facultyService
             .fetchFaculties()
             .then(function (response) {
+              if(response.status===200){
               $scope.faculties = response.data;
+              }
+              else {
+            console.error("Error fetching faculties:", response);
+          }
             })
             .catch(function (error) {
               console.error("Error fetching faculties:", error);
@@ -56,7 +69,11 @@ app.controller(
         homeService
           .createClassGroup($scope.newClassGroup)
           .then(function (response) {
-            $scope.getClassGroups();
+            if (response.status === 201) {
+              $scope.getClassGroups();
+            } else {
+              console.error("Error Creating ClassGroup:", error);
+            }
           })
           .catch(function (error) {
             console.error("Error creating faculty:", error);

@@ -3,7 +3,12 @@ app.controller("CourseController", function ($scope, courseService) {
     courseService
       .fetchCourses()
       .then(function (response) {
-        $scope.courses = response.data;
+        if (response.status === 200) {
+          $scope.courses = response.data;
+        }
+        else {
+          console.error("Error fetching Courses:", response);
+        }
       })
       .catch(function (error) {
         console.error("Error fetching courses:", error);
@@ -43,9 +48,14 @@ app.controller("CourseController", function ($scope, courseService) {
     courseService
       .deleteCourses(selectedCourseIds)
       .then(function (response) {
-        $scope.fetchCourses();
-        $scope.closeCourseRemoveModal();
-        $scope.selectAll = false;
+        if (response.status === 200) {
+          $scope.fetchCourses();
+          $scope.closeCourseRemoveModal();
+          $scope.selectAll = false;
+        }
+        else {
+          console.error("Error deleting Courses:", response);
+        }
       })
       .catch(function (error) {
         alert("Cannot delete courses mapped with classGroups");
@@ -73,8 +83,13 @@ app.controller("CourseController", function ($scope, courseService) {
     courseService
       .updateCourse($scope.editedCourse.id, $scope.editedCourse)
       .then(function (response) {
-        $scope.fetchCourses();
-        $scope.closeCourseEditModal();
+        if (response.status === 200) {
+          $scope.fetchCourses();
+          $scope.closeCourseEditModal();
+        }
+        else {
+          console.error("Error updating courses:", response);
+        }
       })
       .catch(function (error) {
         console.error("Error updating course:", error);
@@ -99,7 +114,12 @@ app.controller("CourseController", function ($scope, courseService) {
     courseService
       .createCourse($scope.newCourse)
       .then(function (response) {
-        $scope.fetchCourses();
+        if (response.status === 201) {
+          $scope.fetchCourses();
+        }
+        else {
+          console.error("Error adding courses:", response);
+        }
       })
       .catch(function (error) {
         console.error("Error creating course:", error);
