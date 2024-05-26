@@ -11,19 +11,14 @@
             Add
           </button>
         </span>
-        <span class="search-bar home-searchspan">
-          <i class="fa-solid fa-magnifying-glass fa-lg searchi"></i>
-
-          <input placeholder="Search" type="text" ng-model="search" class="search-input"
-            style="border: none; outline: none;" />
-        </span>
+        <search-bar-component on-search-change="handleSearchChange(search)"></search-bar-component>
       </div>
     </div>
   </div>
 
   <hr />
   <br />
-  <div class="container">
+  <div class=" container">
 
     <ul>
       <div class="box d-flex justify-content-evenly align-items-center flex-wrap">

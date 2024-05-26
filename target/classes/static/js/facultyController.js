@@ -1,11 +1,21 @@
 app.controller("FacultyController", function ($scope, facultyService) {
   $scope.selectedAction = "";
 
+  $scope.search = '';
+  $scope.handleSearchChange = function (search) {
+    $scope.search = search;
+  };
+
   $scope.fetchFaculties = function () {
     facultyService
       .fetchFaculties()
       .then(function (response) {
-        $scope.faculties = response.data;
+        if (response.status === 200) {
+          $scope.faculties = response.data;
+        }
+        else {
+          console.error("Error fetching Faculties:", response);
+        }
       })
       .catch(function (error) {
         console.error("Error fetching faculties:", error);
@@ -45,9 +55,14 @@ app.controller("FacultyController", function ($scope, facultyService) {
     facultyService
       .deleteFaculties(selectedFacultyIds)
       .then(function (response) {
-        $scope.fetchFaculties();
-        $scope.closeFacultyRemoveModal();
-        $scope.selectAll = false;
+        if (response.status === 200) {
+          $scope.fetchFaculties();
+          $scope.closeFacultyRemoveModal();
+          $scope.selectAll = false;
+        }
+        else {
+          console.error("Error deleting faculties:", response);
+        }
       })
       .catch(function (error) {
         alert("Cannot delete faculties mapped with classGroups");
@@ -70,9 +85,15 @@ app.controller("FacultyController", function ($scope, facultyService) {
     facultyService
       .updateFaculty($scope.editedFaculty.id, $scope.editedFaculty)
       .then(function (response) {
-        $scope.fetchFaculties();
+        if (response.status === 200) {
+          $scope.fetchFaculties();
 
-        $scope.closeFacultyEditModal();
+          $scope.closeFacultyEditModal();
+        }
+        else {
+          console.error("Error updating Faculty:", response);
+        }
+
       })
       .catch(function (error) {
         console.error("Error updating faculty:", error);
@@ -93,7 +114,12 @@ app.controller("FacultyController", function ($scope, facultyService) {
     facultyService
       .createFaculty($scope.newFaculty)
       .then(function (response) {
-        $scope.fetchFaculties();
+        if (response.status === 201) {
+          $scope.fetchFaculties();
+        }
+        else {
+          console.error("Error adding Faculty:", response);
+        }
       })
       .catch(function (error) {
         console.error("Error creating faculty:", error);

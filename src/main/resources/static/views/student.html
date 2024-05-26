@@ -14,18 +14,12 @@
           <span class="btnalignone"><button class="addbtn btncrctn" ng-click="createStudent()">Add</button></span>
 
 
-
-          <span class="search-bar searchcrctn">
-            <i class="fa-solid fa-magnifying-glass fa-lg searchi"></i>
-
-            <input placeholder="Search" type="text" ng-model="search" class="search-input"
-              style="border: none; outline: none" />
-          </span>
+          <search-bar-component on-search-change="handleSearchChange(search)"></search-bar-component>
         </div>
       </div>
     </div>
     <br />
-    <div class="container">
+    <div class=" container">
       <table>
         <tr>
           <th><input type="checkbox" title="Select All" ng-model="selectAll" ng-change="toggleSelectAll()" /></th>

@@ -5,6 +5,7 @@ import com.example.academicsapp.models.Student;
 import com.example.academicsapp.service.ServiceImpls.ClassGroupStudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.google.gson.Gson;
@@ -39,11 +40,11 @@ public class ClassGroupStudentsController {
            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
        }
        catch (RuntimeException e){
-           String jsonString = "{\"key\": \"value\"}"; 
+           String jsonString = "{\"key\": \"value\"}";
            Gson gson = new Gson();
            ClassGroupStudent yourObject = gson.fromJson(jsonString, ClassGroupStudent.class);
 
-           return new ResponseEntity<>(yourObject,HttpStatus.OK);
+           return new ResponseEntity<>(yourObject, HttpStatusCode.valueOf(209)); //if added same student again checking status code functionalty
        }
        catch (Exception e) {
            throw new RuntimeException("Error occurred while creating Student", e);

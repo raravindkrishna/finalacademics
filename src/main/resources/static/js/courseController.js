@@ -19,6 +19,10 @@ app.controller("CourseController", function ($scope, courseService) {
 
   $scope.search = '';
 
+  $scope.handleSearchChange = function (search) {
+    $scope.search = search;
+  };
+
   $scope.updateSearchTerm = function (search) {
     $scope.searchTerm = search;
   };

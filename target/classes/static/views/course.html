@@ -1,4 +1,4 @@
-<div class="outer-box">
+<div class="outer-box" ng-controller="CourseController as ctrl">
   <br>
   <div class="container">
     <div class="container">
@@ -14,15 +14,7 @@
           <span class="btnalignone"><button class="addbtn btncrctn" ng-click="editCourse()">Edit</button></span>
           <span class="btnalignone"><button class="addbtn btncrctn" ng-click="createCourse()">Add</button></span>
 
-
-
-          <span class="search-bar searchcrctn">
-            <i class="fa-solid fa-magnifying-glass fa-lg searchi"></i>
-
-            <input placeholder="Search" type="text" ng-model="search" class="search-input"
-              style="border: none; outline: none" />
-          </span>
-
+          <search-bar-component on-search-change="handleSearchChange(search)"></search-bar-component>
         </div>
 
         <br />

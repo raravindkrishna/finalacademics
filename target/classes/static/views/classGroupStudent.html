@@ -42,11 +42,7 @@
             <button class="addbtn btncrctn" ng-click="showStudentCreateModal()">Add Student</button>
           </span>
 
-          <span class="search-bar searchcrctn">
-            <i class="fa-solid fa-magnifying-glass fa-lg searchi"></i>
-
-            <input placeholder="Search" type="text" ng-model="search" class="search-input" />
-          </span>
+          <search-bar-component on-search-change="handleSearchChange(search)"></search-bar-component>
         </div>
       </div>
     </div>
@@ -85,7 +81,7 @@
             <div class="col-6"><label>Select Faculty</label></div>
             <div class="col-6">
               <select ng-model="selectedFaculty" ng-options="faculty as faculty.facultyName for faculty in faculties">
-                <option>Select Faculty</option>
+                <option value="" disabled selected hidden>Select Faculty</option>
               </select>
             </div>
           </div>

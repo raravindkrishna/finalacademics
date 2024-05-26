@@ -1,15 +1,29 @@
 app.controller(
   "ClassGroupStudentController",
-  function ($scope, $http, $location, $routeParams) {
+  function (
+    $scope,
+    $location,
+    $routeParams,
+    classGroupStudentService,
+    homeService,
+    facultyService,
+    studentService
+  ) {
     let classGroupId = $routeParams.classGroupId;
 
     $scope.getStudents = function () {
-      $http
-        .get(
-          "http://localhost:8080/api/classGroup/" + classGroupId + "/students"
-        )
+      $scope.showadd = function () {
+        alert("Student already in the class");
+      };
+      classGroupStudentService
+        .getStudents(classGroupId)
         .then(function (response) {
-          $scope.joinStudents = response.data;
+          if (response.status === 200) {
+            $scope.joinStudents = response.data;
+          }
+          else {
+            console.error("Error fetching Students:", response);
+          }
         })
         .catch(function (error) {
           console.error("Error fetching students:", error);
@@ -17,12 +31,24 @@ app.controller(
     };
     $scope.getStudents();
 
+    $scope.search = '';
+
+    $scope.handleSearchChange = function (search) {
+      $scope.search = search;
+    };
+
     $scope.getClassgrpDetails = function () {
-      $http
-        .get("http://localhost:8080/api/classGroup/" + classGroupId)
+      homeService
+        .getClassGroupDetails(classGroupId)
         .then(function (response) {
-          $scope.classGroup = response.data;
+          if (response.status === 200) {
+            $scope.classGroup = response.data;
+          }
+          else {
+            console.error("Error fetching ClassGroup Details:", response);
+          }
         })
+
         .catch(function (error) {
           console.error("Error fetching classGroup details:", error);
         });
@@ -32,10 +58,15 @@ app.controller(
     $scope.changeFaculty = function () {
       $scope.showFacEditModal = true;
       $scope.fetchFaculties = function () {
-        $http
-          .get("http://localhost:8080/api/faculty")
+        facultyService
+          .fetchFaculties()
           .then(function (response) {
-            $scope.faculties = response.data;
+            if (response.status === 200) {
+              $scope.faculties = response.data;
+            }
+            else {
+              console.error("Error fetching faculties:", response);
+            }
           })
           .catch(function (error) {
             console.error("Error fetching faculties:", error);
@@ -45,17 +76,18 @@ app.controller(
     };
 
     $scope.updateFac = function () {
-      $http
-        .put(
-          "http://localhost:8080/api/classGroup/" +
-            classGroupId +
-            "/faculty/" +
-            $scope.selectedFaculty.id
-        )
+      classGroupStudentService
+        .updateFaculty(classGroupId, $scope.selectedFaculty.id)
         .then(function (response) {
-          $scope.getClassgrpDetails();
 
-          $scope.closeFacEditModal();
+          if (response.status === 200) {
+            $scope.getClassgrpDetails();
+
+            $scope.closeFacEditModal();
+          }
+          else {
+            console.error("Error updating faculty:", response);
+          }
         })
         .catch(function (error) {
           console.error("Error updating faculty:", error);
@@ -74,20 +106,22 @@ app.controller(
       $scope.showCgEditModal = false;
     };
 
-    $scope.updateCg = function () {
-      console.log($scope.editedCg);
-      $http
-        .put(
-          "http://localhost:8080/api/classGroup/" + classGroupId,
-          $scope.editedCg
-        )
-        .then(function (response) {
-          $scope.getClassgrpDetails();
 
-          $scope.closeCgEditModal();
+    $scope.updateCg = function () {
+      homeService
+        .updateClassGroup(classGroupId, $scope.editedCg)
+        .then(function (response) {
+          if (response.status === 200) {
+            $scope.getClassgrpDetails();
+
+            $scope.closeCgEditModal();
+          }
+          else {
+            console.error("Error updating Classgroup:", response);
+          }
         })
         .catch(function (error) {
-          console.error("Error updating faculty:", error);
+          console.error("Error updating classgroup:", error);
         });
     };
 
@@ -98,10 +132,15 @@ app.controller(
     $scope.showStudentCreateModal = function () {
       $scope.addStudentCreateModal = true;
       $scope.fetchStudents = function () {
-        $http
-          .get("http://localhost:8080/api/student")
+        studentService
+          .fetchStudents()
           .then(function (response) {
-            $scope.students = response.data;
+            if (response.status === 200) {
+              $scope.students = response.data;
+            }
+            else {
+              console.error("Error fetching Students:", response);
+            }
           })
           .catch(function (error) {
             console.error("Error fetching students:", error);
@@ -110,20 +149,20 @@ app.controller(
       $scope.fetchStudents();
     };
 
+
     $scope.addStudent = function () {
-      $http
-        .post(
-          "http://localhost:8080/api/classGroup/" +
-            classGroupId +
-            "/students/" +
-            $scope.selectedStudent.id
-        )
+      classGroupStudentService
+        .addStudent(classGroupId, $scope.selectedStudent.id)
         .then(function (response) {
-          if (response.data.id === null) {
-            $scope.showadd();
-          } else {
+          if (response.status === 201) {
             $scope.showadd = false;
             $scope.getStudents();
+          }
+          else if (response.status === 209) {
+            $scope.showadd();
+          }
+          else {
+            console.error("Error deleting Courses:", response);
           }
         })
         .catch(function (error) {
@@ -131,10 +170,7 @@ app.controller(
         });
     };
 
-    // delte students
-    $scope.showadd = function () {
-      alert("Student already in the class");
-    };
+
     $scope.toggleSelectAll = function () {
       angular.forEach($scope.joinStudents, function (joinStudent) {
         joinStudent.selected = $scope.selectAll;
@@ -146,13 +182,15 @@ app.controller(
     };
 
     $scope.deleteCgConfirm = function () {
-      $http({
-        method: "DELETE",
-        url: "http://localhost:8080/api/classGroup",
-        params: { id: classGroupId },
-      })
+      homeService
+        .deleteClassGroup(classGroupId)
         .then(function (response) {
-          $location.path("/home");
+          if (response.status === 200) {
+            $location.path("/home");
+          }
+          else {
+            console.error("Error fetching Courses:", response);
+          }
         })
         .catch(function (error) {
           alert("Cannot delete classGroup mapped with classGroup Students");
@@ -187,16 +225,17 @@ app.controller(
     $scope.deleteConfirm = function () {
       var selectedjoinStudentIds = $scope.selectedStudentIds;
 
-      $http({
-        method: "DELETE",
-        url:
-          "http://localhost:8080/api/classGroup/" + classGroupId + "/students",
-        params: { id: selectedjoinStudentIds },
-      })
+      classGroupStudentService
+        .removeStudents(classGroupId, selectedjoinStudentIds)
         .then(function (response) {
-          $scope.getStudents();
-          $scope.selectAll = false;
-          $scope.closeStudentRemoveModal();
+          if (response.status === 200) {
+            $scope.getStudents();
+            $scope.selectAll = false;
+            $scope.closeStudentRemoveModal();
+          }
+          else {
+            console.error("Error removing students:", response);
+          }
         })
         .catch(function (error) {
           console.error("Error deleting Students:", error);

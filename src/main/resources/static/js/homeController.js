@@ -27,6 +27,12 @@ app.controller(
         $location.path("/classGroup/" + classGroupId + "/students");
       };
 
+      $scope.search = '';
+
+      $scope.handleSearchChange = function (search) {
+        $scope.search = search;
+      };
+
       $scope.addCg = function () {
         $scope.showCgCreateModal = true;
         $scope.newClassGroup = {};
@@ -34,12 +40,12 @@ app.controller(
           courseService
             .fetchCourses()
             .then(function (response) {
-              if(response.status===200){
-              $scope.courses = response.data;
+              if (response.status === 200) {
+                $scope.courses = response.data;
               }
               else {
-            console.error("Error fetching courses:", response);
-          }
+                console.error("Error fetching courses:", response);
+              }
             })
             .catch(function (error) {
               console.error("Error fetching courses:", error);
@@ -51,12 +57,12 @@ app.controller(
           facultyService
             .fetchFaculties()
             .then(function (response) {
-              if(response.status===200){
-              $scope.faculties = response.data;
+              if (response.status === 200) {
+                $scope.faculties = response.data;
               }
               else {
-            console.error("Error fetching faculties:", response);
-          }
+                console.error("Error fetching faculties:", response);
+              }
             })
             .catch(function (error) {
               console.error("Error fetching faculties:", error);

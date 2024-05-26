@@ -1,11 +1,21 @@
 app.controller("StudentController", function ($scope, studentService) {
   $scope.selectedAction = "";
 
+  $scope.search = '';
+  $scope.handleSearchChange = function (search) {
+    $scope.search = search;
+  };
+
   $scope.fetchStudents = function () {
     studentService
       .fetchStudents()
       .then(function (response) {
-        $scope.students = response.data;
+        if (response.status === 200) {
+          $scope.students = response.data;
+        }
+        else {
+          console.error("Error fetching Students:", response);
+        }
       })
       .catch(function (error) {
         console.error("Error fetching students:", error);
@@ -44,9 +54,14 @@ app.controller("StudentController", function ($scope, studentService) {
     studentService
       .deleteStudents(selectedStudentIds)
       .then(function (response) {
-        $scope.fetchStudents();
-        $scope.closeStudentRemoveModal();
-        $scope.selectAll = false;
+        if (response.status === 200) {
+          $scope.fetchStudents();
+          $scope.closeStudentRemoveModal();
+          $scope.selectAll = false;
+        }
+        else {
+          console.error("Error deleting students:", response);
+        }
       })
       .catch(function (error) {
         alert("Cannot delete students mapped with classGroup Students");
@@ -70,9 +85,14 @@ app.controller("StudentController", function ($scope, studentService) {
     studentService
       .updateStudent($scope.editedStudent.id, $scope.editedStudent)
       .then(function (response) {
-        $scope.fetchStudents();
+        if (response.status === 200) {
+          $scope.fetchStudents();
 
-        $scope.closeStudentEditModal();
+          $scope.closeStudentEditModal();
+        }
+        else {
+          console.error("Error updating Students:", response);
+        }
       })
       .catch(function (error) {
         console.error("Error updating student:", error);
@@ -93,7 +113,12 @@ app.controller("StudentController", function ($scope, studentService) {
     studentService
       .createStudent($scope.newStudent)
       .then(function (response) {
-        $scope.fetchStudents();
+        if (response.status === 201) {
+          $scope.fetchStudents();
+        }
+        else {
+          console.error("Error creating Student:", response);
+        }
       })
       .catch(function (error) {
         console.error("Error creating student:", error);

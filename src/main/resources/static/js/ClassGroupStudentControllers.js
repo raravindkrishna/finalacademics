@@ -31,6 +31,12 @@ app.controller(
     };
     $scope.getStudents();
 
+    $scope.search = '';
+
+    $scope.handleSearchChange = function (search) {
+      $scope.search = search;
+    };
+
     $scope.getClassgrpDetails = function () {
       homeService
         .getClassGroupDetails(classGroupId)
