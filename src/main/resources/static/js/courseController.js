@@ -16,6 +16,13 @@ app.controller("CourseController", function ($scope, courseService) {
   };
   $scope.fetchCourses();
 
+
+  $scope.search = '';
+
+  $scope.updateSearchTerm = function (search) {
+    $scope.searchTerm = search;
+  };
+
   $scope.toggleSelectAll = function () {
     angular.forEach($scope.courses, function (course) {
       course.selected = $scope.selectAll;
